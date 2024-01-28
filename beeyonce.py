@@ -6,7 +6,6 @@ import openai
 class WorkFluentChatbotGUI(QMainWindow):
     def __init__(self, api_key):
         super().__init__()
-        #self.setGeometry(400, 150, 500, 800)
 
         openai.api_key = api_key
         self.languages = ["english", "spanish", "french", "german", "italian", "portuguese", "chinese", "japanese", "korean", "arabic"]
@@ -42,8 +41,6 @@ class WorkFluentChatbotGUI(QMainWindow):
         layout1 = QVBoxLayout()
         layout1.addWidget(self.conversation_text_edit)
         layout1.addWidget(self.input_line_edit)
-        #layout.addWidget(self.translate_button)
-        #layout.addWidget(self.exit_button)
 
         layout2 = QHBoxLayout()
         layout2.addWidget(self.translate_button)
@@ -53,13 +50,12 @@ class WorkFluentChatbotGUI(QMainWindow):
         layout.addLayout(layout1)
         layout.addLayout(layout2)
 
-
         central_widget = QWidget()
         central_widget.setLayout(layout)
         self.setCentralWidget(central_widget)
 
-        self.add_to_conversation("Beeyonce:\nHi, I'm Bee-yonce! I'm excited to help you on your language learning journey!")
-        self.add_to_conversation(f"Choose a language to start learning in:\n ⋆ {'\n ⋆ '.join(self.languages)} \n")
+        self.add_to_conversation("Beeyonce:\nHi, I'm Bee-yonce! I'm excited to help you on your language learning journey!\n")
+        self.add_to_conversation(f"Choose a language to start learning in:\n" + "\n".join([f"⋆ {lang}" for lang in self.languages]) + "\n")
 
     def add_to_conversation(self, text):
         current_text = self.conversation_text_edit.toPlainText()
@@ -76,13 +72,16 @@ class WorkFluentChatbotGUI(QMainWindow):
             self.add_to_conversation("Bee-yonce:\nGoodbye! Have a bee-utiful day.\n\n")
             return
 
+        # Display user input
+        self.add_to_conversation(f"You:\n{user_input}\n")
+
         if not self.language:
             if user_input.lower() in self.languages:
                 self.language = user_input.lower()
-                self.add_to_conversation(f"Bee-yonce:\nYou've chosen: {self.language.capitalize()}\n")
-                self.add_to_conversation("Do you want a direct translation (type 'direct') or phrases on a topic (type 'phrases')?\n\n")
+                self.add_to_conversation(f"Bee-yonce:\nYou've chosen {self.language.capitalize()}\n")
+                self.add_to_conversation("Do you want a direct translation (type 'direct') or phrases on a topic (type 'phrases')?\n")
             else:
-                self.add_to_conversation("Bee-yonce:\nInvalid language. Choose a valid language to start learning in.\n\n")
+                self.add_to_conversation("Bee-yonce:\nInvalid language. Choose a valid language to start learning in.\n")
             self.input_line_edit.clear()
             return
 
@@ -97,10 +96,10 @@ class WorkFluentChatbotGUI(QMainWindow):
                     else "What topic are you interested in?"
                 )
 
-                self.add_to_conversation(f"Bee-yonce:\nSelected translation type: {self.translation_type}")
-                self.add_to_conversation(f'{prompt}\n\n')
+                self.add_to_conversation(f"Bee-yonce:\nYou selected {self.translation_type}\n")
+                self.add_to_conversation(f'{prompt}\n')
             else:
-                self.add_to_conversation("Bee-yonce:\nPlease choose 'direct' or 'phrases'.\n\n")
+                self.add_to_conversation("Bee-yonce:\nPlease choose 'direct' or 'phrases'.\n")
             self.input_line_edit.clear()
             return
 
@@ -111,14 +110,14 @@ class WorkFluentChatbotGUI(QMainWindow):
         if self.translation_type == 'direct':
             phrase = self.user_input
             translated_phrase = self.get_translation(self.language, phrase)
-            self.add_to_conversation(f"Bee-yonce:\n{phrase} in {self.language} is {translated_phrase}\n\n")
+            self.add_to_conversation(f"Bee-yonce:\n{phrase} in {self.language} is {translated_phrase}\n")
         elif self.translation_type == 'phrases':
             topic = self.user_input
             phrases = self.get_phrases(self.language, topic)
-            self.add_to_conversation(f"Bee-yonce:\nHere are some work-related phrases on {topic}:\n{phrases}\n\n")
+            self.add_to_conversation(f"Bee-yonce:\nHere are some work-related phrases on {topic}:\n{phrases}\n")
 
         # Ask the user for the next translation type
-        self.add_to_conversation("Bee-yonce:\nDo you want a direct translation (type 'direct') or phrases on a topic (type 'phrases')?\n\n")
+        self.add_to_conversation("Bee-yonce:\nDo you want a direct translation (type 'direct') or phrases on a topic (type 'phrases')?\n")
         self.translation_type = ""
         self.user_input = ""
         self.input_line_edit.clear()
@@ -143,7 +142,7 @@ class WorkFluentChatbotGUI(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    api_key = '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'
+    api_key = 'YOUR_API_KEY'
     chatbot_gui = WorkFluentChatbotGUI(api_key)
     chatbot_gui.show()
     sys.exit(app.exec_())
