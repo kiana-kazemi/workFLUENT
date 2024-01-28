@@ -1,0 +1,15 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.image-stack {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.image-stack img {
+    width: 100%;
+    height: auto;
+}
