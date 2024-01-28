@@ -1,18 +1,15 @@
-
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5 import QtGui
 import sys
 
-
-class Window(QMainWindow):
+class MainWindow(QMainWindow):
     def __init__(self):
-        super(Window, self).__init__()
+        super(MainWindow, self).__init__()
         self.setGeometry(400, 150, 1200, 900)
         self.setWindowTitle("workFluent")
-        self.initUI()
-    
-    def initUI(self):
+        #self.initUI()
+    #def initUI(self):
         self.label = QtWidgets.QLabel(self)
         self.label.setText("meet bee-yonce!")
         self.label.setFont(QtGui.QFont('Helvetica', 24))
@@ -28,8 +25,16 @@ class Window(QMainWindow):
         self.b2 = QtWidgets.QPushButton(self)
         self.b2.setText("Phrase Suggestion")
         self.b2.move(760, 150)
-        self.b2.adjustSize()
         self.b2.clicked.connect(self.b2clicked)
+        self.b2.adjustSize()
+
+        self.entry = QtWidgets.QLineEdit(self) 
+        self.entry.setObjectName("name_field")
+        self.entry.setText("Enter your desired language here:")
+        self.entry.adjustSize()
+        self.entry.move(500, 200)
+       
+
 
     def b1clicked(self):
         self.label.setText("enter phrase:")
@@ -48,6 +53,7 @@ class Window(QMainWindow):
 
 
 
+
 def b1clicked():
     print("direct translation")
 
@@ -56,7 +62,7 @@ def b2clicked():
 
 def window():
     app = QApplication(sys.argv)
-    win = Window()
+    win = MainWindow()
     
 
     win.show()
