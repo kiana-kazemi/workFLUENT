@@ -1,5 +1,6 @@
 import sys
 from PyQt5.QtWidgets import QInputDialog, QApplication, QWidget, QLabel, QLineEdit, QPushButton, QTextEdit, QVBoxLayout, QHBoxLayout, QComboBox
+from PyQt5.QtGui import QFont
 import openai
 
 
@@ -12,19 +13,37 @@ class WorkFluentChatbotGUI(QWidget):
 
     def init_ui(self):
         self.setWindowTitle('WorkFluent Chatbot')
-        self.setGeometry(100, 100, 600, 400)
+        self.setGeometry(100, 100, 375, 812)  # Set screen size to match iPhone 14 (375 x 812)
 
+        # Set a fun and bubbly font
+        font = QFont("Indie Flower", 14)  # Change to a more fun and bubbly font
+        self.setFont(font)
+
+        # Set background color for all windows
+        self.setStyleSheet("background-color: #f6c935;")
+
+        # Label Intro
         self.label_intro = QLabel("Hi, I'm Bee-yonce! I'm excited to help you on your language learning journey!\n", self)
+        self.label_intro.setStyleSheet("color: black;")
 
+        # Label Language
         self.label_language = QLabel("Choose a language to start learning in:", self)
+        self.label_language.setStyleSheet("color: black;")
+
+        # ComboBox Language
         self.comboBox_language = QComboBox(self)
         self.comboBox_language.addItems(self.languages)
+        self.comboBox_language.setStyleSheet("background-color: #EDEDED; color: black; border-radius: 15px; font-size: 16px;")
 
+        # Start Chat Button
         self.btn_start_chat = QPushButton("Start Chat", self)
         self.btn_start_chat.clicked.connect(self.start_chat)
+        self.btn_start_chat.setStyleSheet("background-color: #8B4513; color: white; border-radius: 15px; font-size: 16px;")
 
+        # Text Output Box
         self.text_output = QTextEdit(self)
         self.text_output.setReadOnly(True)
+        self.text_output.setStyleSheet("background-color: #EDEDED; color: black; border-radius: 15px; font-size: 16px;")
 
         vbox = QVBoxLayout()
         vbox.addWidget(self.label_intro)
@@ -34,6 +53,7 @@ class WorkFluentChatbotGUI(QWidget):
         vbox.addWidget(self.text_output)
 
         self.setLayout(vbox)
+
 
     def start_chat(self):
         language = self.comboBox_language.currentText()
