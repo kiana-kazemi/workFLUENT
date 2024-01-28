@@ -14,7 +14,7 @@ class MainWindow(QMainWindow):
         #set up initial label
         self.label = QtWidgets.QLabel(self)
         self.label.setText("Meet Bee-yonce!")
-        self.label.setFont(QtGui.QFont('Helvetica', 18))
+        self.label.setFont(QtGui.QFont('Cambria', 18))
         self.label.move(50, 50)
         self.label.adjustSize()
 
