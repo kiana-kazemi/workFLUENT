@@ -57,6 +57,6 @@ class WorkFluentChatbot:
 
 
 # Replace 'YOUR_API_KEY' with your OpenAI API key
-api_key = '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'
+api_key = 'YOUR_API_KEY'
 chatbot = WorkFluentChatbot(api_key)
 chatbot.start_chat()

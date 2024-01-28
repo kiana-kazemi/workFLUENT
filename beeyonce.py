@@ -71,8 +71,16 @@ class WorkFluentChatbotGUI(QMainWindow):
         if not self.translation_type:
             if user_input.lower() in ['direct', 'phrases']:
                 self.translation_type = user_input.lower()
+
+                # Customize the prompt based on the translation type
+                prompt = (
+                    "What phrase do you want to translate?"
+                    if self.translation_type == 'direct'
+                    else "What topic are you interested in?"
+                )
+
                 self.add_to_conversation(f"Selected translation type: {self.translation_type}")
-                self.add_to_conversation("Enter the phrase or topic you want translated:")
+                self.add_to_conversation(prompt)
             else:
                 self.add_to_conversation("Please choose 'direct' or 'phrases'.")
             self.input_line_edit.clear()
@@ -91,8 +99,8 @@ class WorkFluentChatbotGUI(QMainWindow):
             phrases = self.get_phrases(self.language, topic)
             self.add_to_conversation(f"Here are some work-related phrases on {topic}:\n{phrases}")
 
+        # Ask the user for the next translation type
         self.add_to_conversation("Do you want a direct translation (type 'direct') or phrases on a topic (type 'phrases')?")
-        self.language = ""
         self.translation_type = ""
         self.user_input = ""
         self.input_line_edit.clear()
@@ -117,7 +125,7 @@ class WorkFluentChatbotGUI(QMainWindow):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    api_key = 'YOU_API_KEY'
+    api_key = 'YOUR_KEY'
     chatbot_gui = WorkFluentChatbotGUI(api_key)
     chatbot_gui.show()
     sys.exit(app.exec_())
