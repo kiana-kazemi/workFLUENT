@@ -6,39 +6,44 @@ import sys
 class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
-        self.setGeometry(400, 150, 1200, 900)
+        self.setGeometry(400, 150, 500, 800)
         self.setWindowTitle("workFluent")
+        self.setStyleSheet("background-color: lightblue;")
 
 
         #self.initUI()
     #def initUI(self):
         self.label = QtWidgets.QLabel(self)
         self.label.setText("Meet Bee-yonce!")
-        self.label.setFont(QtGui.QFont('Helvetica', 24))
-        self.label.move(415, 50)
+        self.label.setFont(QtGui.QFont('Helvetica', 18))
+        self.label.move(50, 50)
         self.label.adjustSize()
+
+        #TODO: add description of bee-yonce
 
         self.b1 = QtWidgets.QPushButton(self)
         self.b1.setText("Direct Translation")
-        self.b1.move(360, 150)
+        self.b1.move(100, 150)
         #self.b1.clicked.connect(self.b1clicked)
         #self.b1.adjustSize()
 
         self.b2 = QtWidgets.QPushButton(self)
         self.b2.setText("Phrase Suggestion")
-        self.b2.move(760, 150)
+        self.b2.move(275, 150)
         #self.b2.clicked.connect(self.b2clicked)
         #self.b2.adjustSize()
 
+        #TODO try to prevent text box from showing until initial button is pressed
         self.entry = QtWidgets.QLineEdit(self) 
         self.entry.setObjectName("name_field")
-        #self.entry.setText("Enter your desired language here:")
+        #   self.entry.setText("Enter your desired language here:")
         self.entry.adjustSize()
-        self.entry.move(500, 200)
+        self.entry.move(200, 200)
 
+        #TODO: try to get button to show up at the same time as text box
         self.b3 = QtWidgets.QPushButton(self)
         self.b3.setText("Done")
-        self.b3.move(600, 250)
+        self.b3.move(350, 250)
 
 
         self.b1.clicked.connect(self.b1clicked)
@@ -55,7 +60,7 @@ class MainWindow(QMainWindow):
         print("direct translation")
         #self.entry = QtWidgets.QLineEdit(self) 
         #self.entry.setObjectName("name_field")
-        #self.entry.setText("Enter your desired phrase here:")
+        #   self.entry.setText("Enter your desired phrase here:")
         #self.entry.adjustSize()
         #self.entry.move(500, 200)
     
@@ -65,7 +70,7 @@ class MainWindow(QMainWindow):
         print("phrase suggestions")
         #self.entry = QtWidgets.QLineEdit(self) 
         #self.entry.setObjectName("name_field")
-        #self.entry.setText("Enter your topic of interest here:")
+        #   self.entry.setText("Enter your topic of interest here:")
         #self.entry.adjustSize()
         #self.entry.move(500, 200)
 
